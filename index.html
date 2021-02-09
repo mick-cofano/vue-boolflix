@@ -9,17 +9,30 @@
   </head>
   <body>
 
+    <!-- APP -->
     <div id="app" class="bool-container">
 
+      <!-- SEARCH BAR -->
       <div class="search-bar">
-        
+        <input v-model="movieResearch" @keyup.enter="movieCreator()" placeholder="Inserisci il titolo di un film">
+        <button type="button" @click="movieCreator()">Avvia ricerca</button>
       </div>
+      <!-- END SEARCH BAR -->
 
+      <!-- MOVIES RESEARCH -->
+      <div class="movies-research-container" v-for="movie in movieList">
+        <div> <h2>Titolo: <h3>{{movie.title}}</h3></h2> </div>
 
+        <div> <h2>Titolo originale: <h3>{{movie.original_title}}</h3></h2> </div>
 
+        <div> <h2>Lingua: <h3>{{movie.original_language}}</h3></h2> </div>
 
+        <div> <h2>Voto: <h3>{{movie.vote_average}}</h3></h2> </div>
+        <br>
+      </div>
+      <!-- END MOVIES RESEARCH -->
     </div>
-
+    <!-- END APP -->
     <script src="js/script.js" charset="utf-8"></script>
   </body>
 </html>
