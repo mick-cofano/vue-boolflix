@@ -29,7 +29,11 @@ new Vue({
         })
 
       console.log(self.movieList);
-    }
-  }
+    },
+
+    getVote(vote) {
+      return parseInt(vote / 2);
+    },
+  },
 });
 Vue.config.devtools = true;
