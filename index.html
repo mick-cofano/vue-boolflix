@@ -13,27 +13,28 @@
     <!-- APP -->
     <div id="app" class="bool-container">
 
-      <!-- SEARCH BAR -->
-      <div class="search-bar">
-        <input v-model="movieResearch" @keyup.enter="movieCreator()" placeholder="Inserisci il titolo di un film">
-        <button type="button" @click="movieCreator()">Avvia ricerca</button>
-      </div>
-      <!-- END SEARCH BAR -->
+        <!-- SEARCH BAR -->
+        <header>
+          <div class="search-bar">
+            <input type="text" v-model="query" @keyup.enter="search" placeholder="Inserisci il titolo di un film">
+          </div>
+        </header>
+        <!-- END SEARCH BAR -->
 
       <!-- MOVIES RESEARCH -->
       <div class="movies-research-container">
 
-        <div class="movie" v-for="movie in movieList">
-          <h2>Titolo: <h3>{{movie.title}}</h3></h2>
-
-          <h2>Titolo originale: <h3>{{movie.original_title}}</h3></h2>
-
-          <h2>Lingua: <h3>{{movie.original_language}}</h3></h2>
-
-          <i class="fas fa-star" v-for="index in getVote(movie.vote_average)"></i>
-          <i class="far fa-star" v-for="index in (5 - getVote(movie.vote_average))"></i>
-          <br>
-        </div>
+          <div class="movie" v-for="result in results">
+              <h3 v-if="result.title">{{ result.title }}</h3>
+              <h3 v-if="result.name">{{ result.name }}</h3>
+              <span v-if="result.original_title">{{ result.original_title }}</span>
+              <span v-if="result.original_name">{{ result.original_name }}</span>
+              <i class="fas fa-star" v-for="index in getVote(result.vote_average)"></i>
+              <i class="far fa-star" v-for="index in (5 - getVote(result.vote_average))"></i>
+              <img v-if="availableFlags.includes(result.original_language)"
+                   :src="'img/flags/' + result.original_language + '.png'">
+              <span v-else>{{ result.original_language }}</span>
+          </div>
 
       </div>
       <!-- END MOVIES RESEARCH -->

@@ -11,24 +11,39 @@
 new Vue({
   el: '#app',
   data: {
-    movieResearch: '',
-    movieList: []
+    query: '',
+    results: [],
+    availableFlags: ['it', 'en'],
   },
 
   methods: {
-    movieCreator: function() {
-      let self = this;
-      self.movieList = [];
+    // movieCreator: function() {
+    //   let self = this;
+    //   self.movieList = [];
+    //
+    //   axios
+    //     .get('https://api.themoviedb.org/3/search/movie?api_key=b241ce78d5c653dd0ccf07053f94426e&query=' + self.movieResearch)
+    //     .then(function(index) {
+    //       for (let i = 0; i < index.data.results.length; i++) {
+    //         self.movieList.push(index.data.results[i])
+    //       }
+    //     })
+    //
+    //   console.log(self.movieList);
+    // },
 
+    search() {
       axios
-        .get('https://api.themoviedb.org/3/search/movie?api_key=b241ce78d5c653dd0ccf07053f94426e&query=' + self.movieResearch)
-        .then(function(index) {
-          for (let i = 0; i < index.data.results.length; i++) {
-            self.movieList.push(index.data.results[i])
-          }
+        .get('https://api.themoviedb.org/3/search/movie', {
+          params: {
+            api_key: 'b241ce78d5c653dd0ccf07053f94426e',
+            query: this.query,
+            language: 'it-IT',
+          },
         })
-
-      console.log(self.movieList);
+        .then((response) => {
+          this.results = response.data.results;
+        });
     },
 
     getVote(vote) {
