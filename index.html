@@ -26,13 +26,15 @@
       <div class="movies-research-container">
 
           <div class="movie" v-for="result in results">
+            <img v-if="result.poster_path" :src="getPosterSrc(result)" />
+            <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png">
               <h3 v-if="result.title">{{ result.title }}</h3>
               <h3 v-if="result.name">{{ result.name }}</h3>
               <span v-if="result.original_title">{{ result.original_title }}</span>
               <span v-if="result.original_name">{{ result.original_name }}</span>
               <i class="fas fa-star" v-for="index in getVote(result.vote_average)"></i>
               <i class="far fa-star" v-for="index in (5 - getVote(result.vote_average))"></i>
-              <img v-if="availableFlags.includes(result.original_language)"
+              <img class="img-languages" v-if="availableFlags.includes(result.original_language)"
                    :src="'img/flags/' + result.original_language + '.png'">
               <span v-else>{{ result.original_language }}</span>
           </div>

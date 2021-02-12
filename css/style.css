@@ -21,7 +21,6 @@
   background-color: lightgrey;
 }
 
-img {
-  height: 50px;
-  width: 50px;
+.img-languages {
+  width: 80px;
 }

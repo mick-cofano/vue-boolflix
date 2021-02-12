@@ -59,6 +59,10 @@ new Vue({
     getVote(vote) {
       return parseInt(vote / 2);
     },
+
+    getPosterSrc(result) {
+      return `https://image.tmdb.org/t/p/w185${result.poster_path}`
+    }
   },
 });
 Vue.config.devtools = true;
