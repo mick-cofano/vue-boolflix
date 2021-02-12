@@ -11,33 +11,59 @@
   <body>
 
     <!-- APP -->
-    <div id="app" class="bool-container">
+    <div id="app">
 
         <!-- SEARCH BAR -->
-        <header>
           <div class="search-bar">
-            <input type="text" v-model="query" @keyup.enter="search" placeholder="Inserisci il titolo di un film">
-            <button @click="search">Avvia Ricerca</button>
+            <header class="container">
+              <a href=""><img src="img/netflix-logo.png" alt=""></a>
+              <input type="text" v-model="query" @keyup.enter="search" placeholder="Inserisci il titolo di un film">
+              <button @click="search">Avvia Ricerca</button>
+            </header>
           </div>
-        </header>
         <!-- END SEARCH BAR -->
 
       <!-- MOVIES RESEARCH -->
       <div class="movies-research-container">
 
-          <div class="movie" v-for="result in results">
-            <img v-if="result.poster_path" :src="getPosterSrc(result)" />
-            <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png">
-              <h3 v-if="result.title">{{ result.title }}</h3>
+        <!-- SINGLE MOVIE OR TVSHOW -->
+        <div class="movie-container container">
+          <div class="flex margin movie" v-for="result in results">
+
+            <!-- IMG BOX -->
+            <div class="img-box">
+              <img v-if="result.poster_path" :src="getPosterSrc(result)" />
+              <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png">
+            </div>
+            <!-- IMG BOX -->
+
+            <!-- FILM INFO -->
+            <div class="film-info">
+              <h3 v-if="result.title"><strong>{{ result.title }}</strong></h3>
               <h3 v-if="result.name">{{ result.name }}</h3>
               <span v-if="result.original_title">{{ result.original_title }}</span>
               <span v-if="result.original_name">{{ result.original_name }}</span>
-              <i class="fas fa-star" v-for="index in getVote(result.vote_average)"></i>
-              <i class="far fa-star" v-for="index in (5 - getVote(result.vote_average))"></i>
-              <img class="img-languages" v-if="availableFlags.includes(result.original_language)"
-                   :src="'img/flags/' + result.original_language + '.png'">
-              <span v-else>{{ result.original_language }}</span>
+
+              <div class="img-languages flex">
+                <img v-if="availableFlags.includes(result.original_language)"
+                     :src="'img/flags/' + result.original_language + '.png'">
+                <span v-else>{{ result.original_language }}</span>
+              </div>
+
+              <p class="overview" >{{ result.overview }}</p>
+              
+              <p>
+                <i class="fas fa-star" v-for="index in getVote(result.vote_average)"></i>
+                <i class="far fa-star" v-for="index in (5 - getVote(result.vote_average))"></i>
+              </p>
+
+
+            </div>
+            <!-- FILM INFO -->
+
           </div>
+        </div>
+        <!-- SINGLE MOVIE OR TVSHOW -->
 
       </div>
       <!-- END MOVIES RESEARCH -->
