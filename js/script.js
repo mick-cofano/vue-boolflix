@@ -62,7 +62,8 @@ new Vue({
 
     getPosterSrc(result) {
       return `https://image.tmdb.org/t/p/w185${result.poster_path}`
-    }
+    },
+
   },
 });
 Vue.config.devtools = true;

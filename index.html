@@ -27,7 +27,7 @@
       <div class="movies-research-container">
 
         <!-- SINGLE MOVIE OR TVSHOW -->
-        <div class="movie-container container">
+        <div v-if="results" class="movie-container container">
           <div class="flex margin movie" v-for="result in results">
 
             <!-- IMG BOX -->
@@ -51,7 +51,7 @@
               </div>
 
               <p class="overview" >{{ result.overview }}</p>
-              
+
               <p>
                 <i class="fas fa-star" v-for="index in getVote(result.vote_average)"></i>
                 <i class="far fa-star" v-for="index in (5 - getVote(result.vote_average))"></i>
