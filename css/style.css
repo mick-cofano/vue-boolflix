@@ -20,3 +20,8 @@
   width: 100%;
   background-color: lightgrey;
 }
+
+img {
+  height: 50px;
+  width: 50px;
+}
